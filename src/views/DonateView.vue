@@ -189,7 +189,7 @@ function enviarFormulario() {
   dialog.value = false
   alert('Gracias por tu interés. Te contactaremos pronto ❤️')
 
-  actualizarMétricas()
+  actualizarMetricas()
 }
 </script>
 
