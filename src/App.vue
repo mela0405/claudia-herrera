@@ -1,30 +1,25 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <v-app>
+    <Navbar v-if="showLayout" />
+    <v-main>
+      <router-view />
+      <GlobalToast ref="toastRef" />
+    </v-main>
+    <Footer v-if="showLayout" />
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script setup>
+import { useRoute } from 'vue-router'
+import { computed, ref } from 'vue'
+import Navbar from '@/components/Navbar.vue'
+import Footer from '@/components/Footer.vue'
+import GlobalToast from '@/components/GlobalToast.vue'
 
-nav {
-  padding: 30px;
-}
+const route = useRoute()
+const toastRef = ref()
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+const showLayout = computed(() => {
+  return !['login', 'registro', 'cambiarpassword', 'recuperarpassword'].includes(route.name?.toLowerCase())
+})
+</script>
